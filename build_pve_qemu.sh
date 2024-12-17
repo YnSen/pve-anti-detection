@@ -4,17 +4,18 @@ ls
 df -h
 git clone git://git.proxmox.com/git/pve-qemu.git
 cd pve-qemu
-git reset --hard 33b22c3fe03e5a6a8b32d7148c4ba774fd7c9937
+#git reset --hard 33b22c3fe03e5a6a8b32d7148c4ba774fd7c9937
 apt install devscripts -y
 mk-build-deps --install
 make
 make clean
-cp ../sedPatch-pve-qemu-kvm7-8-anti-dection.sh qemu/
+#cp ../sedPatch-pve-qemu-kvm7-8-anti-dection.sh qemu/
 cd qemu
-chmod +x sedPatch-pve-qemu-kvm7-8-anti-dection.sh
-bash sedPatch-pve-qemu-kvm7-8-anti-dection.sh
+#chmod +x sedPatch-pve-qemu-kvm7-8-anti-dection.sh
+#bash sedPatch-pve-qemu-kvm7-8-anti-dection.sh
 #cp ../../smbios.h include/hw/firmware/smbios.h
 #cp ../../smbios.c hw/smbios/smbios.c
+sed -i 's/!object_dynamic_cast/object_dynamic_cast/g' hw/vfio/igd.c
 cd ..
 apt install devscripts -y
 mk-build-deps --install
