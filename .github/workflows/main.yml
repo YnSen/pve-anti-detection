@@ -61,7 +61,7 @@ jobs:
           tag_name: ${{ format('v{0}', steps.current-time.outputs.formattedTime) }}
           release_name: v6.6.6.1
           body: |
-            build pve qemu deb form v7.0.0-1 to v9.x
+            build pve qemu deb dds666
           draft: false
           prerelease: false
         env:
