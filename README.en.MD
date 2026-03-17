@@ -1,12 +1,8 @@
 Language [<a href="README.md">中文</a>] | [<a href="README.en.MD">English</a>] Thanks for https://github.com/mk990 translate.
 
-PVE Debain Ubuntu ArchLinux virtual machine emulates a physical machine to avoid(or anti) detection
-
-# Li Xiaoliu666 Project
+PVE Debain Ubuntu ArchLinux virtual machine emulates a physical machine
 
 ## Overview
-
-For reference, you can check out my previous article: [https://www.bilibili.com/read/cv26245305](https://www.bilibili.com/read/cv26245305)
 
 ## 1. Preparation
 
@@ -20,9 +16,6 @@ For reference, you can check out my previous article: [https://www.bilibili.com/
 
 🚨 **No restrictions on SCSI or Virtio devices in this project!** 🚨
 
-3. **Source Code and Tutorials**\
-   The complete source code and tutorial series are available in my Bilibili column:\
-   [PVE Anti-Virtualization Detection for Gaming](https://www.bilibili.com/read/readlist/rl758108)
 
 ## 2. Installation
 
@@ -31,13 +24,11 @@ For reference, you can check out my previous article: [https://www.bilibili.com/
 Download the following packages and file:
 
 - `pve-qemu-kvm_10.xxx_amd64.deb` (Replace `xxx` with the specific version you downloaded)
-- `pve-edk2-firmware-ovmf_xxx.deb` you can also download from https://github.com/lixiaoliu666/pve-anti-detection-edk2-firmware-ovmf
+- `pve-edk2-firmware-ovmf_xxx.deb` you can also download from https://github.com/AICodo/pve-emu-realpc_edk2-firmware-ovmf
 - `ssdt.aml` ssdt.aml==ssdt.dat you can edit ssdt.aml with https://github.com/ic005k/Xiasl
 
 Upload them to `/root` using **WinSCP**.
 
-If you need advanced kernel compilation, refer to my article on compiling and loading PVE Linux kernel modules:\
-[https://www.bilibili.com/read/cv37772880/](https://www.bilibili.com/read/cv37772880/)
 
 ### Check Installed KVM Version
 
@@ -137,16 +128,11 @@ args: -acpitable file=/root/ssdt.aml -cpu host,host-cache-info=on,hypervisor=off
 
 - **For detection bypassing tools in the tools directory** 
   - **Recommended Detection Tools:**
-  - **Something:** `Currently Undetected Checks.txt` 
   - **Basic:** [Virtual Machine Detection Tool]
   - **Advanced:** [`pafish64.exe`](#) and [`al-khaser`](#) are the gold standards for VM detection.
 
-## 5. Further Reading
-
-This project is open-source. All content outside of proprietary parts will be fully disclosed in the series:\
-🔗 [PVE Anti-Virtualization Detection for Gaming](https://www.bilibili.com/read/readlist/rl758108)
 
 We welcome forks and further experimentation!
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=lixiaoliu666/pve-anti-detection&type=Date)](https://www.star-history.com/#lixiaoliu666/pve-anti-detection&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=AICodo/pve-emu-realpc&type=Date)](https://www.star-history.com/#AICodo/pve-emu-realpc&Date)

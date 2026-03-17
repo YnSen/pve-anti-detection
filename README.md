@@ -1,10 +1,19 @@
 Language [<a href="README.md">中文</a>] | [<a href="README.en.MD">English</a>] Thanks for https://github.com/mk990 translate。
 
-PVE Debain Ubuntu ArchLinux virtual machine emulates a physical machine to avoid(or anti) detection（pve Debian Ubuntu ArchLinux虚拟机模拟真实机器防检测）
+PVE Debain Ubuntu ArchLinux virtual machine emulates a physical machine （pve Debian Ubuntu ArchLinux虚拟机模拟真实机器）
 
-lixiaoliu666 作品
 
-20060228更新：发布10.1.2-7_amd64_Strong can dynamically display CPU information such as temperature, MHz, voltage, and power consumption in a Windows VM.Use cpu-z,hwinfo,hwmoniter.cpu传感器穿透到虚拟机显示。
+20060228更新：发布10.1.2-7_amd64_Strong can dynamically display CPU information such as temperature, MHz, voltage, and power consumption in a Windows VM.Use cpu-z,hwinfo,hwmoniter.Intel和AMD CPU传感器穿透到虚拟机显示。
+
+Intel CPU传感器穿透效果演示视频<img width="1545" height="1154" alt="inteldemo" src="https://github.com/user-attachments/assets/e5c2f90b-7e65-45d3-bbc4-6825551d421d" />
+
+
+https://github.com/user-attachments/assets/cf95f3a1-9f47-46a1-94e5-cd68c5f5881c
+
+AMD CPU传感器穿透效果演示视频<img width="1478" height="1182" alt="amddemo" src="https://github.com/user-attachments/assets/2ebe3ca5-c438-4b98-83d9-4295a7d001b1" />
+
+
+https://github.com/user-attachments/assets/69a922ea-df2c-4d13-94cc-d40736336b2e
 
 20250906更新：已取消主板型号随机（可自己定制），取消内存序列号随机（可自己定制），ide sata硬盘自己设置serial=20位序列号进行定制固定（不固定内部默认还是随机）。n卡独显直通43错误请二者选其一：ssdt.aml（不带电池）和ssdt-battery.aml（带个虚拟电池），台式机u选无电池，笔记本u选有电池，加载ssdt后43错误解决了就行。
 
@@ -12,7 +21,6 @@ lixiaoliu666 作品
 
 20250725更新：实现了无序三件套效果（只需要重启一下虚拟机就自动变化）：内存序列号随机，ide和sata硬盘序列号和固件号随机，主板型号随机
 
-可以参考以前我发布的这个文章：https://www.bilibili.com/read/cv26245305 该文章抛砖引玉而已
 
 1、前期准备工作：
 
@@ -22,7 +30,7 @@ pve网页 数据中心-》选项-》MAC地址前缀你先改成D8:FC:93
 
 ！！！！！！！！！！！本项目都不对scsi以及virtio设备有使用限制！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 
-我也在b站这个专栏发布全部的源码和教程如何编译源码，是整个系列的发布： https://www.bilibili.com/read/readlist/rl758108 pve虚拟机模拟真实机器防检测
+
 
 2、正式开始
 
@@ -30,13 +38,12 @@ pve网页 数据中心-》选项-》MAC地址前缀你先改成D8:FC:93
 
 pve-qemu-kvm_10.xxx_amd64.deb  本项目下载  xxx代表你具体下载的版本
 
-pve-edk2-firmware-ovmf_xxx.deb 本项目下载 ，也可以这个项目进行下载 https://github.com/lixiaoliu666/pve-anti-detection-edk2-firmware-ovmf
+pve-edk2-firmware-ovmf_xxx.deb 本项目下载 ，也可以这个项目进行下载 https://github.com/AICodo/pve-emu-realpc_edk2-firmware-ovmf
 
 ssdt.aml
 
 这3个请用winscp 上传到/root目录下
 
-如果你要高级的比如内核编译加东西，参考关于内核模块怎么单独编译并立马使用生效请参考我的这篇文章 https://www.bilibili.com/read/cv37772880/ 单独编译pve linux内核模块（比如kvm）加载到当前内核中立马使用生效
 
 3、查询目前安装的kvm包版本命令
 
@@ -133,17 +140,19 @@ vmgenid: 2271babc-cafc-4c68-be8b-2bb3157c9924
 
 args: -acpitable file=/root/ssdt.aml -cpu host,host-cache-info=on,hypervisor=off,vmware-cpuid-freq=false,enforce=false,host-phys-bits=true -smbios type=0,vendor="American Megatrends International LLC.",version=H3.7G,date='02/21/2023',release=3.7 -smbios type=1,manufacturer="Maxsun",product="MS-Terminator B760M",version="VER:H3.7G(2022/11/29)",serial="Default string",sku="Default string",family="Default string" -smbios type=2,manufacturer="Maxsun",product="MS-Terminator B760M",version="VER:H3.7G(2022/11/29)",serial="Default string",asset="Default string",location="Default string" -smbios type=3,manufacturer="Default string",version="Default string",serial="Default string",asset="Default string",sku="Default string" -smbios type=17,loc_pfx="Controller0-ChannelA-DIMM",manufacturer="KINGSTON",speed=3200,serial=DF1EC466,part="SED3200U1888S",bank="BANK 0",asset="9876543210" -smbios type=4,sock_pfx="LGA1700",manufacturer="Intel(R) Corporation",version="12th Gen Intel(R) Core(TM) i7-12700",max-speed=4900,current-speed=3800,serial="To Be Filled By O.E.M.",asset="To Be Filled By O.E.M.",part="To Be Filled By O.E.M." -smbios type=8,internal_reference="CPU FAN",external_reference="Not Specified",connector_type=0xFF,port_type=0xFF -smbios type=8,internal_reference="J3C1 - GMCH FAN",external_reference="Not Specified",connector_type=0xFF,port_type=0xFF -smbios type=8,internal_reference="J2F1 - LAI FAN",external_reference="Not Specified",connector_type=0xFF,port_type=0xFF -smbios type=11,value="Default string"
 
-6、其他内容详见本项目tools目录，里面有目前过不了的检测说明.txt，虚拟机检测工具.rar，还有高级检测软件。高级检测还得是al-khaser和pafish64.exe检测软件。pafish和al-khaser是虚拟机环境检测的两个金标准。
+6、其他内容详见本项目tools目录，虚拟机检测工具.rar，还有高级检测软件。高级检测还得是al-khaser和pafish64.exe检测软件。pafish和al-khaser是虚拟机环境检测的两个金标准。
 
-7、https://www.bilibili.com/read/cv26245305 
-
-该文章中开源内容外的内容全部开源，将在这个系列全部公布: 
-https://www.bilibili.com/read/readlist/rl758108 pve虚拟机模拟真实机器防检测
 
 本项目抛砖引玉，欢迎fork本项目后自我继续折腾！！！
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=lixiaoliu666/pve-anti-detection&type=Date)](https://www.star-history.com/#lixiaoliu666/pve-anti-detection&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=AICodo/pve-emu-realpc&type=Date)](https://www.star-history.com/#AICodo/pve-emu-realpc&Date)
+
+
+
+
+
+
 
 
 
