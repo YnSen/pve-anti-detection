@@ -49,7 +49,7 @@ ssdt.aml
 
 dpkg -l|grep pve-qemu-kvm
 
-4、如果是10.x，直接安装这2个反检测包就是
+4、如果是10.x，直接安装这2个包就是
 
 dpkg -i pve-qemu-kvm_10.xxx_amd64.deb  xxx代表你具体下载的版本
 
@@ -80,7 +80,7 @@ apt reinstall pve-edk2-firmware-ovmf 或者 apt reinstall pve-edk2-firmware-ovmf
 
 5、新建虚拟机
 
-虚拟机使用ovmf+q35（推荐q35）或者ovmf+i440fx，配置中注意硬盘一定选择sata硬盘（至少128g，50g 80g等大小太不像物理机硬盘大小，别对硬盘大小太抠抠扣扣搜搜了，scsi及virtio硬盘光驱网卡设备等避开使用），ide或者sata光驱，显示先选择标准（弄好后再直通独显核显vgpu等），cpu选择host（1插槽多核心这点一定注意），网卡选择e1000显卡（注意网卡mac地址问题，免得检测虚拟机），避开各种virtio设备（SCSI硬盘光驱、virtio网卡、virtioBlock硬盘、virtio-GPU等），并修改虚拟机的args参数和我一样。内存请使用8192 16384 4096这三个数值并且不开ballooning（更加像物理机内存大小），对应8g 16g 4g，其他大小请勿设置（太假太像虚拟机）。
+虚拟机使用ovmf+q35（推荐q35）或者ovmf+i440fx，配置中注意硬盘一定选择sata硬盘（至少128g，50g 80g等大小太不像物理机硬盘大小，别对硬盘大小太抠抠扣扣搜搜了，scsi及virtio硬盘光驱网卡设备等避开使用），ide或者sata光驱，显示先选择标准（弄好后再直通独显核显vgpu等），cpu选择host（1插槽多核心这点一定注意），网卡选择e1000显卡（注意网卡mac地址问题，免得检测到是虚拟机），避开各种virtio设备（SCSI硬盘光驱、virtio网卡、virtioBlock硬盘、virtio-GPU等），并修改虚拟机的args参数和我一样。内存请使用8192 16384 4096这三个数值并且不开ballooning（更加像物理机内存大小），对应8g 16g 4g，其他大小请勿设置（太假太像虚拟机）。
 
 只有一个原则：硬盘大小，内存大小，网卡都得像真实物理机配置！！！
 
@@ -134,13 +134,13 @@ usb1: host=258a:002a
 
 vmgenid: 2271babc-cafc-4c68-be8b-2bb3157c9924
 
-补充：qemu 10 虚拟机中的args参数我现在全部做了除了上面的可以设置（其他做了影藏定制），就用我这上面的args就是。硬盘不想序列号随机请ide sata设置serial=0123456789ABCDEF0123  类似这样20位数据）。aida64你进去看就知道有些什么硬件了（风扇、温度、电压等）
+补充：qemu 10 虚拟机中的args参数我现在全部做了除了上面的可以设置（其他做了隐藏定制），就用我这上面的args就是。硬盘不想序列号随机请ide sata设置serial=0123456789ABCDEF0123  类似这样20位数据）。aida64你进去看就知道有些什么硬件了（风扇、温度、电压等）
 
 如果是qemu 7和8，需要使用下面的args
 
 args: -acpitable file=/root/ssdt.aml -cpu host,host-cache-info=on,hypervisor=off,vmware-cpuid-freq=false,enforce=false,host-phys-bits=true -smbios type=0,vendor="American Megatrends International LLC.",version=H3.7G,date='02/21/2023',release=3.7 -smbios type=1,manufacturer="Maxsun",product="MS-Terminator B760M",version="VER:H3.7G(2022/11/29)",serial="Default string",sku="Default string",family="Default string" -smbios type=2,manufacturer="Maxsun",product="MS-Terminator B760M",version="VER:H3.7G(2022/11/29)",serial="Default string",asset="Default string",location="Default string" -smbios type=3,manufacturer="Default string",version="Default string",serial="Default string",asset="Default string",sku="Default string" -smbios type=17,loc_pfx="Controller0-ChannelA-DIMM",manufacturer="KINGSTON",speed=3200,serial=DF1EC466,part="SED3200U1888S",bank="BANK 0",asset="9876543210" -smbios type=4,sock_pfx="LGA1700",manufacturer="Intel(R) Corporation",version="12th Gen Intel(R) Core(TM) i7-12700",max-speed=4900,current-speed=3800,serial="To Be Filled By O.E.M.",asset="To Be Filled By O.E.M.",part="To Be Filled By O.E.M." -smbios type=8,internal_reference="CPU FAN",external_reference="Not Specified",connector_type=0xFF,port_type=0xFF -smbios type=8,internal_reference="J3C1 - GMCH FAN",external_reference="Not Specified",connector_type=0xFF,port_type=0xFF -smbios type=8,internal_reference="J2F1 - LAI FAN",external_reference="Not Specified",connector_type=0xFF,port_type=0xFF -smbios type=11,value="Default string"
 
-6、其他内容详见本项目tools目录，虚拟机检测工具.rar，还有高级检测软件。高级检测还得是al-khaser和pafish64.exe检测软件。pafish和al-khaser是虚拟机环境检测的两个金标准。
+6、其他内容详见本项目tools目录，密码123虚拟机检测工具.rar，还有高级检测软件vmcheckv2.zip vmcheckv2.1.zip。高级检测里面有vmaware,al-khaser和pafish64.exe。
 
 
 本项目抛砖引玉，欢迎fork本项目后自我继续折腾！！！
